@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acceso - Plataforma Jurídica</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+    }
+    .bg-corporativo {
+      background-color: #06326E;
+    }
+    .text-corporativo {
+      color: #06326E;
+    }
+    .btn-verde {
+      background-color: #007A82;
+    }
+  </style>
+</head>
+<body>
+  <!-- Login Page -->
+  <div class="min-h-screen flex items-center justify-center bg-corporativo">
+    <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-bold text-center text-corporativo mb-4">Ingreso a la Plataforma</h2>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label for="user" class="block font-semibold text-sm text-gray-700">Usuario</label>
+          <input type="text" id="user" class="w-full px-4 py-2 border rounded-xl focus:outline-none" required />
+        </div>
+        <div>
+          <label for="pass" class="block font-semibold text-sm text-gray-700">Contraseña</label>
+          <input type="password" id="pass" class="w-full px-4 py-2 border rounded-xl focus:outline-none" required />
+        </div>
+        <div>
+          <label for="role" class="block font-semibold text-sm text-gray-700">Rol</label>
+          <select id="role" class="w-full px-4 py-2 border rounded-xl">
+            <option>Abogado</option>
+            <option>Contador</option>
+            <option>Cliente</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-verde w-full py-2 text-white font-semibold rounded-xl hover:opacity-90">Ingresar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dashboard Principal -->
+  <div id="dashboard" class="hidden min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-corporativo text-white p-6 space-y-4">
+      <h2 class="text-xl font-bold">Panel Jurídico</h2>
+      <nav class="space-y-2">
+        <button onclick="mostrarSeccion('clientes')" class="w-full text-left hover:underline">Clientes</button>
+        <button onclick="mostrarSeccion('expedientes')" class="w-full text-left hover:underline">Expedientes</button>
+        <button onclick="mostrarSeccion('logout')" class="w-full text-left hover:underline text-red-200">Cerrar sesión</button>
+      </nav>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="flex-1 p-6 bg-gray-50">
+      <section id="clientes" class="hidden">
+        <h3 class="text-xl font-bold text-corporativo mb-4">Gestión de Clientes</h3>
+        <form id="formCliente" class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white p-4 rounded-xl shadow">
+          <input type="text" placeholder="Nombre completo" class="border p-2 rounded-xl" required />
+          <input type="text" placeholder="Cédula / RUC" class="border p-2 rounded-xl" required />
+          <input type="email" placeholder="Correo electrónico" class="border p-2 rounded-xl" required />
+          <input type="tel" placeholder="Teléfono" class="border p-2 rounded-xl" />
+          <textarea placeholder="Dirección" class="border p-2 rounded-xl md:col-span-2"></textarea>
+          <button type="submit" class="btn-verde text-white font-bold py-2 rounded-xl md:col-span-2">Guardar Cliente</button>
+        </form>
+
+        <div class="mt-6">
+          <h4 class="font-semibold text-lg mb-2">Listado de Clientes</h4>
+          <ul id="listaClientes" class="space-y-2"></ul>
+        </div>
+      </section>
+
+      <section id="expedientes" class="hidden">
+        <h3 class="text-xl font-bold text-corporativo">(Próximo módulo)</h3>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const dashboard = document.getElementById('dashboard');
+    const clientes = document.getElementById('clientes');
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.querySelector('body > div').classList.add('hidden');
+      dashboard.classList.remove('hidden');
+      mostrarSeccion('clientes');
+    });
+
+    function mostrarSeccion(seccion) {
+      clientes.classList.add('hidden');
+      document.getElementById('expedientes').classList.add('hidden');
+      if (seccion === 'clientes') clientes.classList.remove('hidden');
+      if (seccion === 'logout') window.location.reload();
+    }
+
+    // Gestión de clientes (ejemplo simple en frontend)
+    const listaClientes = document.getElementById('listaClientes');
+    const formCliente = document.getElementById('formCliente');
+
+    formCliente.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputs = formCliente.querySelectorAll('input, textarea');
+      const cliente = Array.from(inputs).map(i => i.value).join(' | ');
+      const li = document.createElement('li');
+      li.className = 'bg-white p-2 rounded-xl shadow';
+      li.textContent = cliente;
+      listaClientes.appendChild(li);
+      formCliente.reset();
+    });
+  </script>
+</body>
+</html>
