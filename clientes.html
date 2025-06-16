@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel del Cliente</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .bg-corporativo { background-color: #06326E; }
+    .btn-verde { background-color: #007A82; }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- Encabezado -->
+  <header class="bg-corporativo text-white p-4 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="text-lg font-semibold">Panel de Cliente</h1>
+      <a href="index.html" class="text-sm underline hover:text-gray-300">Cerrar sesión</a>
+    </div>
+  </header>
+
+  <!-- BOTÓN de acceso a Expedientes Jurídicos -->
+  <div class="flex justify-end max-w-7xl mx-auto p-4">
+    <a href="expedientes.html" class="btn-verde text-white px-4 py-2 rounded hover:bg-[#005F65] transition">
+      Gestión de Expedientes
+    </a>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="max-w-7xl mx-auto p-4 bg-white shadow-md rounded-xl">
+    <h2 class="text-[#06326E] text-xl font-bold mb-4">Bienvenido a su plataforma personalizada</h2>
+    <p class="text-gray-700 mb-4">Aquí podrá acceder a sus expedientes, estados procesales, documentos e información relevante gestionada por nuestro equipo.</p>
+
+    <!-- Se puede insertar más información del cliente aquí -->
+    <ul class="list-disc list-inside text-gray-800">
+      <li>Consulta de procesos activos</li>
+      <li>Descarga de documentos</li>
+      <li>Seguimiento de actividades jurídicas</li>
+      <li>Comunicación directa con su abogado</li>
+    </ul>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="bg-corporativo text-white text-center p-4 mt-8 text-sm">
+    Plataforma Jurídica - Lara & Asociados Consultores Legales
+  </footer>
+
+</body>
+</html>
