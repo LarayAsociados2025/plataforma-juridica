@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Documentos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #f9fafb; }
+    .bg-corporativo { background-color: #06326E; }
+    .text-corporativo { color: #06326E; }
+    .btn-verde { background-color: #007A82; color: white; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <header class="bg-corporativo text-white p-4">
+    <h1 class="text-xl font-bold">Módulo de Documentos del Cliente</h1>
+  </header>
+
+  <main class="flex-1 p-4">
+    <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6">
+      <h2 class="text-corporativo text-lg font-semibold mb-4">Subir nuevo documento</h2>
+      <form id="documento-form" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input type="text" placeholder="Nombre del cliente" class="border p-2 rounded" required>
+        <input type="text" placeholder="Número de expediente" class="border p-2 rounded" required>
+        <input type="text" placeholder="Tipo de documento (Demanda, Sentencia, etc.)" class="border p-2 rounded" required>
+        <input type="date" class="border p-2 rounded" required>
+        <input type="file" class="border p-2 rounded col-span-1 md:col-span-2" required>
+        <button type="submit" class="btn-verde px-4 py-2 rounded col-span-1 md:col-span-2">Guardar documento</button>
+      </form>
+    </div>
+
+    <div class="max-w-5xl mx-auto mt-8 bg-white rounded-xl shadow-md p-6">
+      <h2 class="text-corporativo text-lg font-semibold mb-4">Documentos registrados</h2>
+      <table class="w-full border">
+        <thead>
+          <tr class="bg-gray-100 text-left">
+            <th class="p-2">Cliente</th>
+            <th class="p-2">Expediente</th>
+            <th class="p-2">Tipo</th>
+            <th class="p-2">Fecha</th>
+            <th class="p-2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="documentos-lista">
+          <!-- Documentos aparecerán aquí -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="bg-corporativo text-white text-center p-4 text-sm">
+    Plataforma Jurídica - Lara & Asociados Consultores Legales
+  </footer>
+
+  <script>
+    const form = document.getElementById('documento-form');
+    const lista = document.getElementById('documentos-lista');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const [cliente, expediente, tipo, fecha] = Array.from(form.querySelectorAll('input[type=text], input[type=date]')).map(i => i.value);
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="border p-2">\${cliente}</td>
+        <td class="border p-2">\${expediente}</td>
+        <td class="border p-2">\${tipo}</td>
+        <td class="border p-2">\${fecha}</td>
+        <td class="border p-2 text-red-600 cursor-pointer hover:underline" onclick="this.parentElement.remove()">Eliminar</td>
+      `;
+      lista.appendChild(tr);
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
